@@ -10,7 +10,23 @@ const TypeWriter = function (txtElement, words, wait = 3000) {
 
 // Type Method
 TypeWriter.prototype.type = function () {
-  console.log("hello");
+  // Current index of word
+  const current = this.wordIndex % this.words.length;
+
+  // Get full text of current word
+  const fullTxt = this.words[current];
+
+  // check if deleting
+  if (this.isDeleting) {
+    // remove char
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+  } else {
+    // add char
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+  }
+
+  // insert txt into element
+  this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`;
   setTimeout(() => {
     this.type();
   }, 500);
